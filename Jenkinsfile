@@ -16,7 +16,7 @@ pipeline {
             steps {
                 echo 'Checking Secrets'
                 sh 'rm trufflehog || true'
-                sh 'docker run gesellix/trufflehog --json https://github.com/cehkunal/webapp.git > trufflehog'
+                sh 'docker run gesellix/trufflehog --json https://github.com/ssk199441/micro-product-go.git > trufflehog'
                 sh 'cat trufflehog'
             }
         }
