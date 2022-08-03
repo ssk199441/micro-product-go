@@ -29,7 +29,7 @@ pipeline {
                 echo 'BUILD EXECUTION STARTED'
                 sh 'go version'
                 sh 'go get ./...'
-                sh 'docker build . -t shadowshotx/product-go-micro'
+                sh 'docker build . -t ssk199441/product-go-micro'
             }
         }
         stage('Docker Push') {
