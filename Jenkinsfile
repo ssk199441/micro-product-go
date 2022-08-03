@@ -12,6 +12,25 @@ pipeline {
     }
 
     stages {
+        stage("check-git-secrets") {
+            steps {
+                echo 'Checking Secrets'
+                sh 'rm trufflehog || true'
+                sh 'docker run gesellix/trufflehog --json https://github.com/cehkunal/webapp.git > trufflehog'
+                sh 'cat trufflehog'
+            }
+        }
+        stage("source-Composition-analysis") {
+            steps {
+                echo 'Source Composition Analysis Started'
+                sh 'rm owasp* || true'
+                sh 'wget "https://raw.githubusercontent.com/cehkunal/webapp/master/owasp-dependency-check.sh" '
+                sh 'chmod +x owasp-dependency-check.sh'
+                sh 'bash owasp-dependency-check.sh'
+                sh 'cat /var/lib/jenkins/OWASP-Dependency-Check/reports/dependency-check-report.xml'
+
+            }
+        }
         stage("unit-test") {
             steps {
                 echo 'UNIT TEST EXECUTION STARTED'
