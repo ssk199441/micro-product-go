@@ -23,7 +23,8 @@ pipeline {
         stage("source-Composition-analysis") {
             steps {
                 echo 'Source Composition Analysis Started'
-                sh 'rm owasp* || true'               
+                sh 'rm owasp* || true'
+                sh 'rm dependency-check.sh || true'               
                 sh 'wget "https://raw.githubusercontent.com/ssk199441/micro-product-go/master/dependency-check.sh"'
                 sh 'chmod +x dependency-check.sh'
                 sh 'bash dependency-check.sh'
