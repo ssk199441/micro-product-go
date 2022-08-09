@@ -23,12 +23,10 @@ pipeline {
         stage("source-Composition-analysis") {
             steps {
                 echo 'Source Composition Analysis Started'
-                sh 'rm owasp* || true'
-                sh 'rm dependency-check.sh || true'               
-                sh 'wget "https://raw.githubusercontent.com/ssk199441/micro-product-go/master/dependency-check.sh"'
-                sh 'chmod +x dependency-check.sh'
-                sh 'bash dependency-check.sh'
-                sh 'cat /var/lib/jenkins/OWASP-Dependency-Check/data/cache/dependency-check-report.xml'
+                echo $GOPATH
+                sh 'git clone https://github.com/ssk199441/micro-product-go.git'
+                sh 'cd $GOPATH/micro-product-go.git'
+                sh 'go list -json -deps | docker run --rm -i sonatypecommunity/nancy:latest sleuth'
             }
         }
         stage("unit-test") {
