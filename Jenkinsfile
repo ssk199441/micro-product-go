@@ -47,6 +47,14 @@ pipeline {
                 sh 'docker build . -t ssk1994/product-go-micro'
             }
         }
+        stage("scan-docker") {
+            steps {
+                echo 'Docker Image Scanning Started'
+                sh 'git clone https://github.com/docker/docker-bench-security.git'
+                sh 'cd docker-bench-security'
+                sh 'docker-compose run --rm docker-bench-security'
+            }
+        }
         stage('Docker Push') {
             agent any
             steps {
