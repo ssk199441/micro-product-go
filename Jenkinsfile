@@ -39,6 +39,7 @@ pipeline {
                 echo 'Docker Image Scanning Started'
                 sh 'git clone https://github.com/docker/docker-bench-security.git'
                 sh 'cd docker-bench-security'
+                sh 'pwd'
                 sh 'docker-compose run --rm docker-bench-security'
             }
         }
