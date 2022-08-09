@@ -23,7 +23,7 @@ pipeline {
         stage("source-Composition-analysis") {
             steps {
                 echo 'Source Composition Analysis Started'
-                echo 'cd /home/kali/go-workspace/src/github.com'
+                sh 'cd /home/kali/go-workspace/src/github.com'
                 sh 'git clone https://github.com/ssk199441/micro-product-go.git testpipe'
                 sh 'cd /home/kali/go-workspace/src/github.com/testpipe'
                 sh 'go list -json -deps | docker run --rm -i sonatypecommunity/nancy:latest sleuth'
