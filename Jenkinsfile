@@ -8,7 +8,7 @@ pipeline {
     environment {
         GO117MODULE = 'on'
         CGO_ENABLED = 0 
-        GOPATH = "/home/kali/go-workspace/src/github.com"
+        GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
     }
 
     stages {
@@ -24,7 +24,8 @@ pipeline {
             steps {
                 echo 'Source Composition Analysis Started' 
                 sh 'pwd'    
-                sh 'go list -json -deps | docker run --rm -i sonatypecommunity/nancy:latest sleuth'
+                sh 'alias nancy="docker run -it --rm -v $(pwd):/tmp --name nancy sonatype-nexus-community/docker-nancy:latest'
+                sh 'nancy go.sum'
             }
         }
         stage("unit-test") {
