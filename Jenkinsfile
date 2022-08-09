@@ -23,7 +23,7 @@ pipeline {
         stage("source-Composition-analysis") {
             steps {
                 echo 'Source Composition Analysis Started'
-                echo $GOPATH
+                echo env.GOPATH
                 sh 'git clone https://github.com/ssk199441/micro-product-go.git'
                 sh 'cd $GOPATH/micro-product-go.git'
                 sh 'go list -json -deps | docker run --rm -i sonatypecommunity/nancy:latest sleuth'
