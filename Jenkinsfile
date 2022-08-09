@@ -19,20 +19,7 @@ pipeline {
                 sh 'docker run gesellix/trufflehog --json https://github.com/ssk199441/micro-product-go.git > trufflehog'
                 sh 'cat trufflehog'
             }
-        }
-        stage("source-Composition-analysis") {
-            steps {
-                echo 'Source Composition Analysis Started' 
-                sh 'pwd'    
-                sh 'go list -json -deps | docker run --rm -i sonatypecommunity/nancy:latest sleuth'               
-            }
-        }
-        stage("unit-test") {
-            steps {
-                echo 'UNIT TEST EXECUTION STARTED'
-                sh 'make unit-tests'
-            }
-        }
+        }       
         stage("functional-test") {
             steps {
                 echo 'FUNCTIONAL TEST EXECUTION STARTED'
@@ -51,7 +38,7 @@ pipeline {
             steps {
                 echo 'Docker Image Scanning Started'
                 sh 'git clone https://github.com/docker/docker-bench-security.git'
-                sh 'cd docker-bench-security'
+                sh 'cd docker-bench-security`'
                 sh 'docker-compose run --rm docker-bench-security'
             }
         }
