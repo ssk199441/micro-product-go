@@ -24,7 +24,7 @@ pipeline {
             steps {
                 echo 'Source Composition Analysis Started' 
                 sh 'pwd'    
-                sh 'alias nancy="docker run -it --rm -v $(pwd):/tmp --name nancy sonatype-nexus-community/docker-nancy:latest'
+                sh 'alias nancy="docker run -it --rm -v $(pwd):/tmp --name nancy sonatype-nexus-community/docker-nancy:latest"'
                 sh 'nancy go.sum'
             }
         }
