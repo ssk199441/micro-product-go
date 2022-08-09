@@ -8,7 +8,7 @@ pipeline {
     environment {
         GO117MODULE = 'on'
         CGO_ENABLED = 0 
-        GOPATH = "${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"
+        GOPATH = "/home/kali/go-workspace/src/github.com"
     }
 
     stages {
@@ -23,7 +23,7 @@ pipeline {
         stage("source-Composition-analysis") {
             steps {
                 echo 'Source Composition Analysis Started'
-                echo env.GOPATH
+                echo 'cd $GOPATH'
                 sh 'git clone https://github.com/ssk199441/micro-product-go.git'
                 sh 'cd $GOPATH/micro-product-go.git'
                 sh 'go list -json -deps | docker run --rm -i sonatypecommunity/nancy:latest sleuth'
